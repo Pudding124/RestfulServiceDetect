@@ -21,12 +21,17 @@ public class ServiceLevel {
 
     Logger log = LoggerFactory.getLogger(ServiceLevel.class);
 
+    EndpointLevel endpointLevel;
+
     @RequestMapping(value = "/swagger", method = RequestMethod.POST)
-    public void parseSwaggerService(@RequestBody String SwaggerDoc){
+    public void parseSwaggerService(@RequestBody String swaggerDoc){
+        endpointLevel = new EndpointLevel();
         String title = null;
         String description = null;
         String host = null;
         String basePath = null;
+        String baseUrl = null;
+        boolean httpsFlag = false;
 
         // Service Level check
         int operationQuantity = 0;
@@ -35,9 +40,9 @@ public class ServiceLevel {
         List<String> produces = null;
 
         // save restful feture
-        ArrayList<String> feture = new ArrayList<String>();
+        ArrayList<String> feture = new ArrayList<>();
 
-        Swagger swagger = new SwaggerParser().parse(SwaggerDoc);
+        Swagger swagger = new SwaggerParser().parse(swaggerDoc);
         title = swagger.getInfo().getTitle();
         description = swagger.getInfo().getDescription();
         host = swagger.getHost();
@@ -49,6 +54,7 @@ public class ServiceLevel {
         for(Scheme scheme : schemes){
             if(scheme.toValue().toLowerCase().equals("https")){
                 feture.add("HTTPS support");
+                httpsFlag = true;
                 break;
             }
         }
@@ -85,9 +91,10 @@ public class ServiceLevel {
             feture.add("At most 20 operations");
         }
 
-        for(String str : feture){
-            log.info(str);
-        }
+//        for(String str : feture){
+//            log.info(str);
+//        }
+        endpointLevel.parseSwaggerEndpoint(swagger, baseUrl, feture);
 
     }
 

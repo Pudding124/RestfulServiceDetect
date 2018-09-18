@@ -59,6 +59,36 @@ public class ServiceLevel {
             }
         }
 
+        if(basePath == null){
+            if(host.subSequence(host.length()-1,host.length()).equals("/")){
+                if(httpsFlag){
+                    baseUrl = "https://" + host.substring(0, host.length()-1);
+                }else if(!httpsFlag){
+                    baseUrl = "http://" + host.substring(0, host.length()-1);
+                }
+            }else{
+                if(httpsFlag){
+                    baseUrl = "https://" + host;
+                }else if(!httpsFlag){
+                    baseUrl = "http://" + host;
+                }
+            }
+        }else{
+            if(basePath.subSequence(basePath.length()-1,basePath.length()).equals("/")){
+                if(httpsFlag){
+                    baseUrl = "https://" + host + basePath.substring(0, basePath.length()-1);
+                }else if(!httpsFlag){
+                    baseUrl = "http://" + host + basePath.substring(0, basePath.length()-1);
+                }
+            }else{
+                if(httpsFlag){
+                    baseUrl = "https://" + host + basePath;
+                }else if(!httpsFlag){
+                    baseUrl = "http://" + host + basePath;
+                }
+            }
+        }
+
         if(securityDefinitions != null){
             for(String key : securityDefinitions.keySet()){
                 SecuritySchemeDefinition securitySchemeDefinition = securityDefinitions.get(key);

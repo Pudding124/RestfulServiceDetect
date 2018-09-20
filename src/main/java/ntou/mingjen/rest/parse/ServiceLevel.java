@@ -45,8 +45,8 @@ public class ServiceLevel {
         ArrayList<String> feture = new ArrayList<>();
 
         Swagger swagger = new SwaggerParser().parse(swaggerDoc);
-        title = swagger.getInfo().getTitle();
-        description = swagger.getInfo().getDescription();
+        if(swagger.getInfo().getTitle() != null)title = swagger.getInfo().getTitle();
+        if(swagger.getInfo().getDescription() != null)description = swagger.getInfo().getDescription();
         host = swagger.getHost();
         basePath = swagger.getBasePath();
         schemes = swagger.getSchemes();
@@ -54,12 +54,14 @@ public class ServiceLevel {
         produces = swagger.getProduces();
         consumes = swagger.getConsumes();
 
-        for(Scheme scheme : schemes){
-            if(scheme.toValue().toLowerCase().equals("https")){
-                feture.add("HTTPS support");
-                fetureCount.setHttpsSupport(fetureCount.getHttpsSupport()+1);
-                httpsFlag = true;
-                break;
+        if(schemes != null){
+            for(Scheme scheme : schemes){
+                if(scheme.toValue().toLowerCase().equals("https")){
+                    feture.add("HTTPS support");
+                    fetureCount.setHttpsSupport(fetureCount.getHttpsSupport()+1);
+                    httpsFlag = true;
+                    break;
+                }
             }
         }
 

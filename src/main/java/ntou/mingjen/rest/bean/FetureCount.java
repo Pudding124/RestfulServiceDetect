@@ -2,6 +2,10 @@ package ntou.mingjen.rest.bean;
 
 public class FetureCount {
 
+    int swaggerDoc = 0;
+
+    int endpointNumber = 0;
+
     int httpsSupport = 0;
 
     int userAuthentication = 0;
@@ -19,6 +23,22 @@ public class FetureCount {
     int explainErrorMessages = 0;
 
     int noAPIUseInApps = 0;
+
+    public int getSwaggerDoc() {
+        return swaggerDoc;
+    }
+
+    public void setSwaggerDoc(int swaggerDoc) {
+        this.swaggerDoc = swaggerDoc;
+    }
+
+    public int getEndpointNumber() {
+        return endpointNumber;
+    }
+
+    public void setEndpointNumber(int endpointNumber) {
+        this.endpointNumber = endpointNumber;
+    }
 
     public int getHttpsSupport() {
         return httpsSupport;

@@ -33,6 +33,7 @@ public class RunGuruLocalData {
                 if(document != null){
                     ServiceLevel serviceLevel = new ServiceLevel();
                     serviceLevel.parseSwaggerService(document, fetureCount);
+                    fetureCount.setSwaggerDoc(fetureCount.getSwaggerDoc()+1);
                 }else{
                     log.error("error read swagger local file: {}", serviceFile);
                 }
@@ -40,6 +41,7 @@ public class RunGuruLocalData {
                 log.info("finish move file {} to finish folder.", serviceFile);
             } catch (Exception e) {
                 log.error("error parsing on {}", serviceFile);
+                //log.info("error :{}",e);
                 //try {
                 //	Files.move(Paths.get("./src/main/resources/swagger/error/" + serviceFile), Paths.get("./src/main/resources/swagger/guru/" + serviceFile));
                 //} catch (IOException e1) {
@@ -47,14 +49,19 @@ public class RunGuruLocalData {
                 //}
             }
         }
-        log.info("RestStyleUrls :{}",fetureCount.getRestStyleUrls());
-        log.info("AtMostTwentyOperation :{}",fetureCount.getAtMostTwentyOperation());
+        log.info("SwaggerDoc :{}",fetureCount.getSwaggerDoc());
+        log.info("->");
         log.info("HttpsSupport :{}",fetureCount.getHttpsSupport());
-        log.info("ExplainErrorMessages :{}",fetureCount.getExplainErrorMessages());
-        log.info("HttpSatausCodeUse :{}",fetureCount.getHttpSatausCodeUse());
-        log.info("OutputJson :{}",fetureCount.getOutputJson());
-        log.info("InputJson :{}",fetureCount.getInputJson());
+        log.info("AtMostTwentyOperation :{}",fetureCount.getAtMostTwentyOperation());
         log.info("UserAuthentication :{}",fetureCount.getUserAuthentication());
+        log.info("");
+        log.info("EndpointNumber :{}",fetureCount.getEndpointNumber());
+        log.info("->");
+        log.info("RestStyleUrls :{}",fetureCount.getRestStyleUrls());
+        log.info("InputJson :{}",fetureCount.getInputJson());
+        log.info("OutputJson :{}",fetureCount.getOutputJson());
+        log.info("HttpSatausCodeUse :{}",fetureCount.getHttpSatausCodeUse());
+        log.info("ExplainErrorMessages :{}",fetureCount.getExplainErrorMessages());
         log.info("NoAPIUseInApps :{}",fetureCount.getNoAPIUseInApps());
     }
 

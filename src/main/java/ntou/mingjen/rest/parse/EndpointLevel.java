@@ -13,6 +13,7 @@ public class EndpointLevel {
     public void parseSwaggerEndpoint(Swagger swagger, String baseUrl, ArrayList<String> feture, FetureCount fetureCount){
         for (String p : swagger.getPaths().keySet()) {
             if (swagger.getPaths().get(p).getDelete() != null) {
+                fetureCount.setEndpointNumber(fetureCount.getEndpointNumber()+1);
                 boolean checkRestful = p.contains("{");
                 String endpoint = baseUrl+p;
                 io.swagger.models.Operation swaggerOperation = swagger.getPaths().get(p).getDelete();
@@ -25,6 +26,7 @@ public class EndpointLevel {
                 feture = checkInputFormatAndOutputFormat(swaggerOperation, feture, fetureCount);
             }
             if (swagger.getPaths().get(p).getGet() != null) {
+                fetureCount.setEndpointNumber(fetureCount.getEndpointNumber()+1);
                 boolean checkRestful = p.contains("{");
                 String endpoint = baseUrl+p;
                 io.swagger.models.Operation swaggerOperation = swagger.getPaths().get(p).getGet();
@@ -36,6 +38,7 @@ public class EndpointLevel {
                 feture = checkInputFormatAndOutputFormat(swaggerOperation, feture, fetureCount);
             }
             if (swagger.getPaths().get(p).getPatch() != null) {
+                fetureCount.setEndpointNumber(fetureCount.getEndpointNumber()+1);
                 boolean checkRestful = p.contains("{");
                 String endpoint = baseUrl+p;
                 io.swagger.models.Operation swaggerOperation = swagger.getPaths().get(p).getPatch();
@@ -47,6 +50,7 @@ public class EndpointLevel {
                 feture = checkInputFormatAndOutputFormat(swaggerOperation, feture, fetureCount);
             }
             if (swagger.getPaths().get(p).getPost() != null) {
+                fetureCount.setEndpointNumber(fetureCount.getEndpointNumber()+1);
                 boolean checkRestful = p.contains("{");
                 String endpoint = baseUrl+p;
                 io.swagger.models.Operation swaggerOperation = swagger.getPaths().get(p).getPost();
@@ -58,6 +62,7 @@ public class EndpointLevel {
                 feture = checkInputFormatAndOutputFormat(swaggerOperation, feture, fetureCount);
             }
             if (swagger.getPaths().get(p).getPut() != null) {
+                fetureCount.setEndpointNumber(fetureCount.getEndpointNumber()+1);
                 boolean checkRestful = p.contains("{");
                 String endpoint = baseUrl+p;
                 io.swagger.models.Operation swaggerOperation = swagger.getPaths().get(p).getPut();
@@ -76,15 +81,16 @@ public class EndpointLevel {
             feture.add("HTTP status code use");
             fetureCount.setHttpSatausCodeUse(fetureCount.getHttpSatausCodeUse()+1);
             for(String key : swaggerOperation.getResponses().keySet()){
-                int statusCode = Integer.valueOf(key);
+                if(key.toLowerCase().equals("default")){
+                    feture.add("Explain Error messages");
+                    fetureCount.setExplainErrorMessages(fetureCount.getExplainErrorMessages()+1);
+                    break;
+                }
+                int statusCode = Integer.valueOf(key); //小心接收到 default
                 if(statusCode >= 300){
                     feture.add("Explain Error messages");
                     fetureCount.setExplainErrorMessages(fetureCount.getExplainErrorMessages()+1);
                     log.info("status code :{}", key);
-                    break;
-                }else if(key.toLowerCase().equals("default")){
-                    feture.add("Explain Error messages");
-                    fetureCount.setExplainErrorMessages(fetureCount.getExplainErrorMessages()+1);
                     break;
                 }
             }

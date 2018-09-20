@@ -18,7 +18,7 @@ public class FetureCount {
 
     int restStyleUrls = 0;
 
-    int httpSatausCodeUse = 0;
+    int httpStatusCodeUse = 0;
 
     int explainErrorMessages = 0;
 
@@ -88,12 +88,12 @@ public class FetureCount {
         this.restStyleUrls = restStyleUrls;
     }
 
-    public int getHttpSatausCodeUse() {
-        return httpSatausCodeUse;
+    public int getHttpStatusCodeUse() {
+        return httpStatusCodeUse;
     }
 
-    public void setHttpSatausCodeUse(int httpSatausCodeUse) {
-        this.httpSatausCodeUse = httpSatausCodeUse;
+    public void setHttpStatusCodeUse(int httpStatusCodeUse) {
+        this.httpStatusCodeUse = httpStatusCodeUse;
     }
 
     public int getExplainErrorMessages() {

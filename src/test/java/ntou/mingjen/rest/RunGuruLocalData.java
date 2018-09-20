@@ -37,16 +37,16 @@ public class RunGuruLocalData {
                 }else{
                     log.error("error read swagger local file: {}", serviceFile);
                 }
-                //Files.move(Paths.get("./src/main/resources/swagger/error/" + serviceFile), Paths.get("./src/main/resources/swagger/finish/" + serviceFile));
+                Files.move(Paths.get("./src/main/resources/GuruSwaggerDoc/" + serviceFile), Paths.get("./src/main/resources/finish/" + serviceFile));
                 log.info("finish move file {} to finish folder.", serviceFile);
             } catch (Exception e) {
                 log.error("error parsing on {}", serviceFile);
                 //log.info("error :{}",e);
-                //try {
-                //	Files.move(Paths.get("./src/main/resources/swagger/error/" + serviceFile), Paths.get("./src/main/resources/swagger/guru/" + serviceFile));
-                //} catch (IOException e1) {
-                //	log.info("error on move file to error folder", e);
-                //}
+                try {
+                	Files.move(Paths.get("./src/main/resources/GuruSwaggerDoc/" + serviceFile), Paths.get("./src/main/resources/error/" + serviceFile));
+                } catch (IOException e1) {
+                	log.info("error on move file to error folder", e);
+                }
             }
         }
         log.info("SwaggerDoc :{}",fetureCount.getSwaggerDoc());
@@ -60,7 +60,7 @@ public class RunGuruLocalData {
         log.info("RestStyleUrls :{}",fetureCount.getRestStyleUrls());
         log.info("InputJson :{}",fetureCount.getInputJson());
         log.info("OutputJson :{}",fetureCount.getOutputJson());
-        log.info("HttpSatausCodeUse :{}",fetureCount.getHttpSatausCodeUse());
+        log.info("HttpStatusCodeUse :{}",fetureCount.getHttpStatusCodeUse());
         log.info("ExplainErrorMessages :{}",fetureCount.getExplainErrorMessages());
         log.info("NoAPIUseInApps :{}",fetureCount.getNoAPIUseInApps());
     }

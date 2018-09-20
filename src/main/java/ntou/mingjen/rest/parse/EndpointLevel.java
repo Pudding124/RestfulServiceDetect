@@ -79,7 +79,7 @@ public class EndpointLevel {
     public ArrayList<String> checkStatusCodeAndErrorMessages(io.swagger.models.Operation swaggerOperation, ArrayList<String> feture, FetureCount fetureCount){
         if(swaggerOperation.getResponses() != null){
             feture.add("HTTP status code use");
-            fetureCount.setHttpSatausCodeUse(fetureCount.getHttpSatausCodeUse()+1);
+            fetureCount.setHttpStatusCodeUse(fetureCount.getHttpStatusCodeUse()+1);
             for(String key : swaggerOperation.getResponses().keySet()){
                 if(key.toLowerCase().equals("default")){
                     feture.add("Explain Error messages");

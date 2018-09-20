@@ -53,6 +53,7 @@ public class RunGuruLocalData {
         log.info("ExplainErrorMessages :{}",fetureCount.getExplainErrorMessages());
         log.info("HttpSatausCodeUse :{}",fetureCount.getHttpSatausCodeUse());
         log.info("OutputJson :{}",fetureCount.getOutputJson());
+        log.info("InputJson :{}",fetureCount.getInputJson());
         log.info("UserAuthentication :{}",fetureCount.getUserAuthentication());
         log.info("NoAPIUseInApps :{}",fetureCount.getNoAPIUseInApps());
     }

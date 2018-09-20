@@ -39,6 +39,7 @@ public class ServiceLevel {
         List<Scheme> schemes = null;
         Map<String, SecuritySchemeDefinition> securityDefinitions = null;
         List<String> produces = null;
+        List<String> consumes = null;
 
         // save restful feture
         ArrayList<String> feture = new ArrayList<>();
@@ -51,6 +52,7 @@ public class ServiceLevel {
         schemes = swagger.getSchemes();
         securityDefinitions = swagger.getSecurityDefinitions();
         produces = swagger.getProduces();
+        consumes = swagger.getConsumes();
 
         for(Scheme scheme : schemes){
             if(scheme.toValue().toLowerCase().equals("https")){
@@ -114,7 +116,15 @@ public class ServiceLevel {
             for(String produce : produces){
                 if(produce.equals("application/json")){
                     feture.add("Output format JSON");
-                    fetureCount.setOutputJson(fetureCount.getOutputJson()+1);
+                    break;
+                }
+            }
+        }
+
+        if(consumes != null){
+            for(String consume : consumes){
+                if(consume.equals("application/json")){
+                    feture.add("Input format JSON");
                     break;
                 }
             }

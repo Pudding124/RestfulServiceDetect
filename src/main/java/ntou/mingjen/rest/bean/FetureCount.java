@@ -10,6 +10,8 @@ public class FetureCount {
 
     int outputJson = 0;
 
+    int inputJson = 0;
+
     int restStyleUrls = 0;
 
     int httpSatausCodeUse = 0;
@@ -48,6 +50,14 @@ public class FetureCount {
 
     public void setOutputJson(int outputJson) {
         this.outputJson = outputJson;
+    }
+
+    public int getInputJson() {
+        return inputJson;
+    }
+
+    public void setInputJson(int inputJson) {
+        this.inputJson = inputJson;
     }
 
     public int getRestStyleUrls() {

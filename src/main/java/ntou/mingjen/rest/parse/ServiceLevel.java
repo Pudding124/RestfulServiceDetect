@@ -4,6 +4,7 @@ import io.swagger.models.Scheme;
 import io.swagger.models.Swagger;
 import io.swagger.models.auth.SecuritySchemeDefinition;
 import io.swagger.parser.SwaggerParser;
+import ntou.mingjen.rest.bean.FetureCount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,7 @@ public class ServiceLevel {
     EndpointLevel endpointLevel;
 
     @RequestMapping(value = "/swagger", method = RequestMethod.POST)
-    public void parseSwaggerService(@RequestBody String swaggerDoc){
+    public void parseSwaggerService(@RequestBody String swaggerDoc, FetureCount fetureCount){
         endpointLevel = new EndpointLevel();
         String title = null;
         String description = null;
@@ -54,6 +55,7 @@ public class ServiceLevel {
         for(Scheme scheme : schemes){
             if(scheme.toValue().toLowerCase().equals("https")){
                 feture.add("HTTPS support");
+                fetureCount.setHttpsSupport(fetureCount.getHttpsSupport()+1);
                 httpsFlag = true;
                 break;
             }
@@ -94,12 +96,15 @@ public class ServiceLevel {
                 SecuritySchemeDefinition securitySchemeDefinition = securityDefinitions.get(key);
                 if(securitySchemeDefinition.getType().equals("basic")){
                     feture.add("User authentication");
+                    fetureCount.setUserAuthentication(fetureCount.getUserAuthentication()+1);
                     break;
                 }else if(securitySchemeDefinition.getType().equals("apiKey")){
                     feture.add("User authentication");
+                    fetureCount.setUserAuthentication(fetureCount.getUserAuthentication()+1);
                     break;
                 }else if(securitySchemeDefinition.getType().equals("oauth2")){
                     feture.add("User authentication");
+                    fetureCount.setUserAuthentication(fetureCount.getUserAuthentication()+1);
                     break;
                 }
             }
@@ -109,6 +114,7 @@ public class ServiceLevel {
             for(String produce : produces){
                 if(produce.equals("application/json")){
                     feture.add("Output format JSON");
+                    fetureCount.setOutputJson(fetureCount.getOutputJson()+1);
                     break;
                 }
             }
@@ -119,13 +125,15 @@ public class ServiceLevel {
         }
         if(operationQuantity <= 20){
             feture.add("At most 20 operations");
+            fetureCount.setAtMostTwentyOperation(fetureCount.getAtMostTwentyOperation()+1);
         }
 
 //        for(String str : feture){
 //            log.info(str);
 //        }
-        endpointLevel.parseSwaggerEndpoint(swagger, baseUrl, feture);
+        endpointLevel.parseSwaggerEndpoint(swagger, baseUrl, feture, fetureCount);
 
     }
+
 
 }
